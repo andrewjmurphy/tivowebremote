@@ -1,0 +1,12 @@
+<?php
+
+http_response_code(204);
+
+if (isset($_GET['IRCOMMAND'])){
+
+$currenttime = time();
+$txt = "time: ". $currenttime . " " . $_GET['IRCOMMAND'] . "\n";
+file_put_contents("/tmp/newfile.txt", $txt, FILE_APPEND);
+
+}
+?>

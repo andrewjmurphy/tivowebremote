@@ -30,12 +30,14 @@ function sendCommand($command) {
   $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
   if ($socket === false) {
       echo "unable to open socket to TIVO " . socket_strerror(socket_last_error()) . "\n";
+      http_response_code(500);
   }
 
   # connect to the socket created above
   $conn_result = socket_connect($socket, $address, $port);
   if ($conn_result === false) {
       echo "Connect failed with reason: " . socket_strerror(socket_last_error($socket)) . "\n";
+      http_response_code(500);
   }
 
   socket_write($socket, $command, strlen($command));
